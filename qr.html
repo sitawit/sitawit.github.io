@@ -1,0 +1,84 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>QR Generator</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+	integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<header class="header clearfix">
+			<h3 class="text-muted">QR Generator</h3>
+		</header>
+
+		<main role="main">
+
+		<div class="jumbotron">
+			<p>
+				<img id="qrImg" />
+			</p>
+			<hr />
+			<p>
+				<a target="_blank" id="qrLink" href="#"></a>
+			</p>
+		</div>
+
+		<div class="row marketing">
+			<div class="col-lg-12">
+					<div class="form-group">
+						<label for="inputURL">URL</label> <input type="text"
+							class="form-control" id="inputURL"
+							placeholder="http://www.example.com/...">
+					</div>
+					<div class="form-group">
+						<label for="inputSize">Size</label> <select id="inputSize"
+							class="form-control">
+							<option selected>Choose...</option>
+							<option value="57">Small</option>
+							<option value="177">Medium</option>
+							<option value="500">Big</option>
+						</select>
+					</div>
+					<button id="generate" type="submit" class="btn btn-primary">Generate</button>
+			</div>
+		</div>
+
+		</main>
+
+		<footer class="footer">
+			<p>&copy; Sitawit 2018</p>
+		</footer>
+
+		<script>
+			$(document).ready(function() {
+				var baseUrl = "https://chart.googleapis.com/chart";
+				
+				$("#generate").click(function() {
+					var size = $("#inputSize").val();
+					var data = $("#inputURL").val();
+					var qrUrl = baseUrl + "?cht=qr&chs=" + size + "x" + size + "&chl=" + encodeURI(data);
+					$("#qrImg").attr("src", qrUrl);
+					$("#qrLink").attr("href", qrUrl);
+					$("#qrLink").html(qrUrl);
+				});
+				
+				
+			});
+		</script>
+	</div>
+	<!-- /container -->
+</body>
+</html>
